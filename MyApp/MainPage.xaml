@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="MyApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Margin="0,0,0,0" RenderTransformOrigin="0.491,0.481">
+            <TextBox Name="Input_Amount" Width="290" HorizontalAlignment="Left"></TextBox>
+            <TextBox Name="Input_Category" Width="290" HorizontalAlignment="Left"></TextBox>
+            <Button Click="IncomeData" Width="292" Height="30">Income</Button>
+            <Button Click="OutcomeData" Width="292" Height="30">Outcome</Button>
+            <TextBox Name="Delete_ID" Width="290" HorizontalAlignment="Left"></TextBox>
+            <Button Click="DeleteData" Width="292" Height="30">Remove ID</Button>
+            <Button Click="DeleteAllData" Width="292" Height="30">RemoveTable</Button>
+            <ToggleSwitch x:Name = "ToggleSwitch" Width="291" Height="62" Header="History of operation" IsOn="False" OffContent="Hide" OnContent="Show"
+              Toggled="ToggleSwitch_Toggled"/>
+            <TextBlock Name="Sum_Box" Text="{Binding}" Width="290" TextAlignment="Left" HorizontalAlignment="Left"></TextBlock>
+            <ListView Visibility="Collapsed" x:Name="Output" Height="448" Width="290" HorizontalAlignment="Left" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>

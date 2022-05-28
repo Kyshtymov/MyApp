@@ -1,0 +1,2 @@
+C:\Users\Lagrange\Desktop\MyApp\MyApp\DataAccessLibrary\DataAccessLibrary.csproj;x86
+C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\MyApp.csproj;x86
