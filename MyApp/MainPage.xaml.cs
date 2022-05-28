@@ -54,6 +54,7 @@ namespace MyApp
             if (Output.Visibility == Visibility.Visible)
             {
                 entries = DataAccess.GetData();
+
                 entries.Insert(0, "Total = " + DataAccess.Sum());
                 Output.ItemsSource = entries;
             }
