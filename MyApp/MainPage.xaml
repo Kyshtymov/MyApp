@@ -8,25 +8,93 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Margin="0,0,0,0" RenderTransformOrigin="0.491,0.481">
-            <TextBox Name="Input_Amount" Width="290" HorizontalAlignment="Left"></TextBox>
-            <TextBox Name="Input_Category" Width="290" HorizontalAlignment="Left"></TextBox>
-            <Button Click="IncomeData" Width="292" Height="30">Income</Button>
-            <Button Click="OutcomeData" Width="292" Height="30">Outcome</Button>
-            <TextBox Name="Delete_ID" Width="290" HorizontalAlignment="Left"></TextBox>
-            <Button Click="DeleteData" Width="292" Height="30">Remove ID</Button>
-            <Button Click="DeleteAllData" Width="292" Height="30">RemoveTable</Button>
-            <ToggleSwitch x:Name = "ToggleSwitch" Width="291" Height="62" Header="History of operation" IsOn="False" OffContent="Hide" OnContent="Show"
-              Toggled="ToggleSwitch_Toggled"/>
-            <TextBlock Name="Sum_Box" Text="{Binding}" Width="290" TextAlignment="Left" HorizontalAlignment="Left"></TextBlock>
-            <ListView Visibility="Collapsed" x:Name="Output" Height="448" Width="290" HorizontalAlignment="Left" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="144*"/>
+            <ColumnDefinition Width="383*"/>
+            <ColumnDefinition Width="113*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,15">Меню</TextBlock>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <Button Click="IncomeData"  Content="Доход" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <Button Click="OutcomeData" Content="Расход" Margin ="10" HorizontalAlignment="Stretch"></Button>
+            </StackPanel>
+        </Grid >
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">День</TextBlock>
+                    <TextBox Name="Input_Day" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Месяц</TextBlock>
+                    <TextBox Name="Input_Month" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Год</TextBlock>
+                    <TextBox Name="Input_Year" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Сумма</TextBlock>
+                    <TextBox Name="Input_Amount" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="4" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
+                    <TextBox Name="Input_Category" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
+                </StackPanel>
+
+
+                <StackPanel Grid.Column="5" VerticalAlignment="Center">
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Комментарий</TextBlock>
+                    <TextBox Name="Input_Commentary" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <ListView x:Name="Output"  HorizontalAlignment="Center" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="3">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Удалить или обновить по ID</TextBlock>
+                <TextBox Name="Delete_ID" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                <ToggleSwitch x:Name = "ToggleSwitchUpdate" Header="Обновить операцию по ID" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Не обновнять" OnContent="Обновить" Toggled="ToggleSwitch_Toggled_Update"/>
+                <Button Click="DeleteData" Margin ="10" HorizontalAlignment="Stretch" Content="Удалить по ID"></Button>
+                <Button Click="DeleteAllData" Margin ="10, 10, 10, 10" HorizontalAlignment="Stretch" Content="Стереть таблицу полностью"></Button>
+                <ToggleSwitch x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled"/>
+                <ToggleSwitch x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled_Sum"/>
+                <Button Click="UpdateSum" Content="Обновить прибыль" Margin ="10" HorizontalAlignment="Stretch"></Button>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Page>
