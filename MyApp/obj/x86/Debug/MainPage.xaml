@@ -18,8 +18,28 @@
         <Grid Grid.Column="0">
             <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,15">Меню</TextBlock>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                <Button x:ConnectionId='15'                     Content="Доход" Margin ="10" HorizontalAlignment="Stretch"></Button>
-                <Button x:ConnectionId='16'                     Content="Расход" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                
+                <ComboBox x:ConnectionId='18' x:Name="OperationComboBox" HorizontalAlignment="Stretch"
+                    Header="Операция" PlaceholderText="Выберите операцию" HorizontalContentAlignment="Center" 
+                                                                          Margin="10"  >
+                    <ComboBoxItem>Доход</ComboBoxItem>
+                    <ComboBoxItem>Расход</ComboBoxItem>
+                </ComboBox>
+                
+                <Button x:ConnectionId='19'              Content="Добавить" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Вывод статистики с</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:ConnectionId='24' Name="Day_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox x:ConnectionId='25' Name="Month_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox x:ConnectionId='26' Name="Year_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                </StackPanel>
+                <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Вывод статистики по</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox x:ConnectionId='21' Name="Day_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox x:ConnectionId='22' Name="Month_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox x:ConnectionId='23' Name="Year_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                </StackPanel>
+                <Button x:ConnectionId='20'                       Content="Очистить период" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid >
 
@@ -42,38 +62,47 @@
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">День</TextBlock>
-                    <TextBox x:ConnectionId='14' Name="Input_Day" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                    <TextBox x:ConnectionId='17' Name="Input_Day" HorizontalAlignment="Stretch" Margin="5"></TextBox>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Месяц</TextBlock>
-                    <TextBox x:ConnectionId='13' Name="Input_Month" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                    <TextBox x:ConnectionId='16' Name="Input_Month" HorizontalAlignment="Stretch" Margin="5"></TextBox>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Год</TextBlock>
-                    <TextBox x:ConnectionId='12' Name="Input_Year" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                    <TextBox x:ConnectionId='15' Name="Input_Year" HorizontalAlignment="Stretch" Margin="5"></TextBox>
                 </StackPanel>
 
                 <StackPanel Grid.Column="3" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment = "Center" Margin="15,15,15,5">Сумма</TextBlock>
-                    <TextBox x:ConnectionId='11' Name="Input_Amount" HorizontalAlignment="Stretch" Margin="5"></TextBox>
+                    <TextBox x:ConnectionId='14' Name="Input_Amount" HorizontalAlignment="Stretch" Margin="5"></TextBox>
                 </StackPanel>
 
                 <StackPanel Grid.Column="4" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
-                    <TextBox x:ConnectionId='10' Name="Input_Category" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
+                    <ComboBox x:ConnectionId='12' Name="Input_Category"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
+                    IsEditable="true"                                                       
+                                                >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
                 </StackPanel>
 
 
                 <StackPanel Grid.Column="5" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Комментарий</TextBlock>
-                    <TextBox x:ConnectionId='9' Name="Input_Commentary" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
+                    <TextBox x:ConnectionId='11' Name="Input_Commentary" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
                 </StackPanel>
             </Grid>
             
             <Grid Grid.Row="1">
-                <ListView x:ConnectionId='8' x:Name="Output"  HorizontalAlignment="Center" >
+                <ListView x:ConnectionId='9' x:Name="Output"  HorizontalAlignment="Center" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>
@@ -86,13 +115,14 @@
         <Grid Grid.Column="3">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Удалить или обновить по ID</TextBlock>
-                <TextBox x:ConnectionId='1' Name="Delete_ID" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
-                <ToggleSwitch x:ConnectionId='2' x:Name = "ToggleSwitchUpdate" Header="Обновить операцию по ID" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Не обновнять" OnContent="Обновить"                                      />
-                <Button x:ConnectionId='3'                    Margin ="10" HorizontalAlignment="Stretch" Content="Удалить по ID"></Button>
-                <Button x:ConnectionId='4'                       Margin ="10, 10, 10, 10" HorizontalAlignment="Stretch" Content="Стереть таблицу полностью"></Button>
-                <ToggleSwitch x:ConnectionId='5' x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                               />
-                <ToggleSwitch x:ConnectionId='6' x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                                   />
-                <Button x:ConnectionId='7'                   Content="Обновить прибыль" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <TextBox x:ConnectionId='2' Name="Delete_ID" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                <ToggleSwitch x:ConnectionId='3' x:Name = "ToggleSwitchUpdate" Header="Обновить операцию по ID" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Не обновнять" OnContent="Обновить"                                      />
+                <Button x:ConnectionId='4'                    Margin ="10" HorizontalAlignment="Stretch" Content="Удалить по ID"></Button>
+                <Button x:ConnectionId='5'                       Margin ="10, 10, 10, 10" HorizontalAlignment="Stretch" Content="Стереть таблицу полностью"></Button>
+                
+                <ToggleSwitch x:ConnectionId='6' x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                               />
+                <ToggleSwitch x:ConnectionId='7' x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                                   />
+                <Button x:ConnectionId='8'                     Content="Обновить таблицу" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid>
 

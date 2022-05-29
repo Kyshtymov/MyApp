@@ -15,8 +15,7 @@
             <ColumnDefinition Width="113*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,15">Меню</TextBlock>
+        <Grid Grid.Column="0" Background="LightGray">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 
                 <ComboBox x:Name="OperationComboBox" HorizontalAlignment="Stretch"
@@ -26,8 +25,20 @@
                     <ComboBoxItem>Расход</ComboBoxItem>
                 </ComboBox>
                 
-                <Button Click="IncomeData"  Content="Доход" Margin ="10" HorizontalAlignment="Stretch"></Button>
-                <Button Click="OutcomeData" Content="Расход" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <Button Click="Add"  Content="Добавить" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Вывод статистики с</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Name="Day_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox Name="Month_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox Name="Year_filter_1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                </StackPanel>
+                <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Вывод статистики по</TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Name="Day_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox Name="Month_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                    <TextBox Name="Year_filter_2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
+                </StackPanel>
+                <Button Click="Clear_filter"  Content="Очистить период" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid >
 
@@ -37,7 +48,7 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="Linen">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
@@ -70,9 +81,9 @@
 
                 <StackPanel Grid.Column="4" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
-                     <ComboBox Name="ComboBox_Category" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
+                    <ComboBox Name="Input_Category"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
                     IsEditable="true" SelectionChanged="ComboBox_Category_SelectionChanged" 
-          TextSubmitted="FontSizeComboBox_TextSubmitted">
+          TextSubmitted="Category_TextSubmitted">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"/>
@@ -100,16 +111,17 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="3">
+        <Grid Grid.Column="2" Background="LightBlue">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Удалить или обновить по ID</TextBlock>
                 <TextBox Name="Delete_ID" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>
                 <ToggleSwitch x:Name = "ToggleSwitchUpdate" Header="Обновить операцию по ID" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Не обновнять" OnContent="Обновить" Toggled="ToggleSwitch_Toggled_Update"/>
                 <Button Click="DeleteData" Margin ="10" HorizontalAlignment="Stretch" Content="Удалить по ID"></Button>
                 <Button Click="DeleteAllData" Margin ="10, 10, 10, 10" HorizontalAlignment="Stretch" Content="Стереть таблицу полностью"></Button>
+                
                 <ToggleSwitch x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled"/>
                 <ToggleSwitch x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled_Sum"/>
-                <Button Click="UpdateSum" Content="Обновить прибыль" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <Button Click="UpdateTable" Content="Обновить таблицу" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid>
 

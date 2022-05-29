@@ -9,7 +9,7 @@ namespace DataAccessLibrary
 {
     public static class DataAccess
     {
-        public async static void InitializeDatabase()
+        public async static void InitializeDatabase() //создание или открытие таблицы (ID, день, месяц, год, сумма, категория, комментарий)
         {
             await Windows.Storage.ApplicationData.Current.LocalFolder.CreateFileAsync("sqliteSample.db", Windows.Storage.CreationCollisionOption.OpenIfExists);
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
@@ -31,9 +31,8 @@ namespace DataAccessLibrary
             }
         }
 
-        public static void AddData(string Day, string Month, string Year, string Amount, string Category, string Commentary, int income)
+        public static void AddData(string Day, string Month, string Year, string Amount, string Category, string Commentary, int income) //добавляет данные в таблицу, income - индикатор, доход или расход
         {
-
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
             using (SqliteConnection db =
               new SqliteConnection($"Filename={dbpath}"))
@@ -43,12 +42,11 @@ namespace DataAccessLibrary
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = db;
 
-                // Use parameterized query to prevent SQL injection attacks
 
                 insertCommand.CommandText = "INSERT INTO MyTable VALUES (NULL, @Day, @Month, @Year, @Entry, @Category, @Commentary);";
                 
                 if (income == 1) insertCommand.Parameters.AddWithValue("@Entry", Amount);
-                else insertCommand.Parameters.AddWithValue("@Entry", "-" + Amount);
+                else insertCommand.Parameters.AddWithValue("@Entry", "-" + Amount); //если расход, то возвращает отрицательное значение
 
                 insertCommand.Parameters.AddWithValue("@Day", Day);
                 insertCommand.Parameters.AddWithValue("@Month", Month);
@@ -64,7 +62,7 @@ namespace DataAccessLibrary
         }
 
 
-        public static void UpdateData(string ID, string Day, string Month, string Year, string Amount, string Category, string Commentary, int income)
+        public static void UpdateData(string ID, string Day, string Month, string Year, string Amount, string Category, string Commentary, int income) //функция обновления данных по ID
         {
 
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
@@ -76,7 +74,6 @@ namespace DataAccessLibrary
                 SqliteCommand insertCommand = new SqliteCommand();
                 insertCommand.Connection = db;
 
-                // Use parameterized query to prevent SQL injection attacks
                 
                 insertCommand.CommandText = "UPDATE MyTable SET id = @ID,  Day = @Day, Month = @Month, Year = @Year, Amount = @Entry, Category = @Category, Commentary = @Commentary WHERE id = @ID;";
                 if (income == 1)  insertCommand.Parameters.AddWithValue("@Entry", Amount);
@@ -96,7 +93,7 @@ namespace DataAccessLibrary
 
         }
 
-        public static void DeleteData(string idText)
+        public static void DeleteData(string idText) //функция удаляет данные по ID
         {
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
             using (SqliteConnection db =
@@ -117,7 +114,7 @@ namespace DataAccessLibrary
         }
 
 
-        public static void DeleteAllData()
+        public static void DeleteAllData() //функция удаляет все данные с таблицы
         {
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
             using (SqliteConnection db =
@@ -135,7 +132,7 @@ namespace DataAccessLibrary
             }
 
         }
-        public static List<String> GetData()
+        public static List<String> GetData(string Day1, string Month1, string Year1, string Day2, string Month2, string Year2, bool stat, out float sum, out int operations) //функция возвращает список данных за период или все данные
         {
             List<String> entries = new List<string>();
 
@@ -144,15 +141,78 @@ namespace DataAccessLibrary
                new SqliteConnection($"Filename={dbpath}"))
             {
                 db.Open();
+                
 
-                SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from MyTable", db);
+                SqliteCommand selectCommand;
+                if (!stat) selectCommand = new SqliteCommand("SELECT * from MyTable", db);
+                else
+                {
+                    selectCommand = new SqliteCommand("SELECT * from MyTable WHERE (Year BETWEEN @Year1 AND @Year2)", db);
+                    selectCommand.Parameters.AddWithValue("@Year1", Year1);
+                    selectCommand.Parameters.AddWithValue("@Year2", Year2);
+                }
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
-
+                sum = 0;
+                operations = 0;
                 while (query.Read())
                 {
+                    if (stat) //если выбрано вернуть данные за период, начинается решение, лежит ли дата в заданном диапазоне
+                    {
+                        bool ShowData = false;
+                        int Day1I = Int32.Parse(Day1), Month1I = Int32.Parse(Month1), Year1I = Int32.Parse(Year1);
+                        int Day2I = Int32.Parse(Day2), Month2I = Int32.Parse(Month2), Year2I = Int32.Parse(Year2);
+                        
+                        if (Year1I == Year2I)
+                        {
+                            if ((Month1I <= query.GetInt32(2)) && (Month2I >= query.GetInt32(2)))
+                            {
+                                if (Month1I == Month2I)
+                                {
+                                    if ((Day1I <= query.GetInt32(1)) && (Day2I >= query.GetInt32(1))) ShowData = true;
+                                }
+
+                                if ((Month1I != Month2I) && (query.GetInt32(2) == Month1I))
+                                    if (Day1I <= query.GetInt32(1)) ShowData = true;
+
+                                if ((Month1I != Month2I) && (query.GetInt32(2) == Month2I))
+                                    if (Day2I >= query.GetInt32(1)) ShowData = true;
+                                
+                                if ((Month1I < query.GetInt32(2)) && (Month2I > query.GetInt32(2))) ShowData = true;
+                            }
+                        }
+
+                        if ((Year1I != Year2I) && (query.GetInt32(3) == Year1I))
+                        {
+                            if (Month1I <= query.GetInt32(2))
+                            {
+                                if (query.GetInt32(2) == Month1I)
+                                    if (Day1I <= query.GetInt32(1)) ShowData = true;
+
+                                if (Month1I < query.GetInt32(2)) ShowData = true;
+                            }
+                        }
+
+                        if ((Year1I != Year2I) && (query.GetInt32(3) == Year2I))
+                        {
+                            if (Month2I >= query.GetInt32(2))
+                            {
+                                if (query.GetInt32(2) == Month2I)
+                                    if (Day2I >= query.GetInt32(1)) ShowData = true;
+
+                                if (Month2I > query.GetInt32(2)) ShowData = true;
+                            }
+                        }
+
+
+                        if ((Year1I < query.GetInt32(3)) && (Year2I > query.GetInt32(3))) ShowData = true;
+
+
+
+                        if (!ShowData) continue;
+                    }
+
                     string Day = query.GetString(1);
                     if (Day.Length == 1) Day = "0" + Day;
 
@@ -160,9 +220,11 @@ namespace DataAccessLibrary
                     if (Month.Length == 1) Month = "0" + Month;
 
                     string Year = query.GetString(3);
-                    if (Year.Length == 1) Year = "0" + Year;
+                    if (Year.Length == 1) Year = "0" + Year; //вывод данных в удобном формате
                     String Output = "ID: " + query.GetString(0) + "  Дата: " + Day + "." + Month + "." + Year + "  Сумма: " + query.GetString(4) + "  Категория: " + query.GetString(5) + "  Комментарий: " + query.GetString(6);
                     entries.Add(Output);
+                    sum += query.GetFloat(4); //считает итоговую сумму по данным
+                    operations++; //считает количество совершенных операций по данным
                 }
 
                 db.Close();
@@ -172,7 +234,7 @@ namespace DataAccessLibrary
         }
 
 
-        public static string Sum(string ID, string Day, string Month, string Year, string Amount, string Category, string Commentary, bool total, out int Operations)
+        public static string Sum(string ID, string Day, string Month, string Year, string Amount, string Category, string Commentary, bool total, out int Operations) //возвращает сумму, согласно выбранным критериям
         {
             float sum = 0;
             Operations = 0;
@@ -182,7 +244,7 @@ namespace DataAccessLibrary
             {
                 db.Open();
                 SqliteCommand selectCommand;
-                if ((ID + Day + Month + Year + Amount + Category + Commentary == "") && (!total)) return "0";
+                if ((ID + Day + Month + Year + Amount + Category + Commentary == "") && (!total)) return "0"; //проверка, если нет критерий
 
                 string IDCom = "", DayCom = "", MonthCom = "", YearCom = "", AmountCom = "", CategoryCom = "", CommentaryCom = "";
 
@@ -197,7 +259,8 @@ namespace DataAccessLibrary
                 if (Amount != "") AmountCom = " AND Amount = @Amount ";
                 if (Category != "") CategoryCom = " AND Category = @Category ";
                 if (Commentary != "") CommentaryCom = " AND Commentary = @Commentary ";
-                if (total) selectCommand = new SqliteCommand("SELECT Amount from MyTable", db);
+
+                if (total) selectCommand = new SqliteCommand("SELECT Amount from MyTable", db); //total - индикатор, если хотим вывести полную сумму в таблице
                 else
                 {
                     string Command = "SELECT Amount from MyTable Where " + IDCom + DayCom + MonthCom + YearCom + AmountCom + CategoryCom + CommentaryCom;
@@ -215,7 +278,7 @@ namespace DataAccessLibrary
 
                 while (query.Read())
                 {
-                    Operations++;
+                    Operations++; //подсчёт количества операций и сумму по критериям или полную сумму
                     sum += query.GetFloat(0);
                 }
 
