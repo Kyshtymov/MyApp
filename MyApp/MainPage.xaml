@@ -18,6 +18,14 @@
         <Grid Grid.Column="0">
             <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,15">Меню</TextBlock>
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                
+                <ComboBox x:Name="OperationComboBox" HorizontalAlignment="Stretch"
+                    Header="Операция" PlaceholderText="Выберите операцию" HorizontalContentAlignment="Center" 
+                    SelectionChanged="OperationComboBox_SelectionChanged" Margin="10"  >
+                    <ComboBoxItem>Доход</ComboBoxItem>
+                    <ComboBoxItem>Расход</ComboBoxItem>
+                </ComboBox>
+                
                 <Button Click="IncomeData"  Content="Доход" Margin ="10" HorizontalAlignment="Stretch"></Button>
                 <Button Click="OutcomeData" Content="Расход" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
@@ -62,7 +70,16 @@
 
                 <StackPanel Grid.Column="4" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
-                    <TextBox Name="Input_Category" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
+                     <ComboBox Name="ComboBox_Category" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
+                    IsEditable="true" SelectionChanged="ComboBox_Category_SelectionChanged" 
+          TextSubmitted="FontSizeComboBox_TextSubmitted">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
                 </StackPanel>
 
 

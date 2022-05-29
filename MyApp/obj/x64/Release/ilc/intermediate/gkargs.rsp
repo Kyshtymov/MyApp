@@ -1,0 +1,7 @@
+/In:"C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x64\Release\ilc\in"
+/Lib:"C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x64\Release\ilc\in"
+/Lib:"C:\Program Files (x86)\Microsoft SDKs\UWPNuGetPackages\microsoft.net.native.compiler\1.7.6\tools\x64\ilc\lib\Private"
+/WinMD:"C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x64\Release\ilc\in\WinMetadata\Windows.winmd"
+/VSTelemetrySessionSettings:"{"IsOptedIn":true,"HostName":"Dev14","AppInsightsInstrumentationKey":"f144292e-e3b2-4011-ac90-20e5c03fbce5","AsimovInstrumentationKey":"AIF-312cbd79-9dbb-4c48-a7da-3cc2a931cb70","AppId":1001,"UserId":"1cf91df8-b66a-421f-bf30-fb711394620a","Id":"ce472930-ee70-476c-92a3-6184f577c8c7","ProcessStartTime":637892406901309572}"
+/RdXmlPath:"C:\Program Files (x86)\Microsoft SDKs\UWPNuGetPackages\microsoft.net.native.compiler\1.7.6\tools\LibraryXML"
+/RunOnlyPreDR

@@ -21,7 +21,9 @@ namespace MyApp
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class MainPage : Page
+    /// 
+
+public sealed partial class MainPage : Page
     {
 
         bool History = false;
@@ -32,7 +34,10 @@ namespace MyApp
             this.InitializeComponent();
         }
 
-        private void Log(string LogText)
+
+
+
+    private void Log(string LogText)
         {
             int pos = 0;
             List<String> entries = new List<string>();
@@ -200,6 +205,7 @@ namespace MyApp
                 else
                 {
                     ShowSum = false;
+                    Log("");
                 }
             }
 
@@ -208,6 +214,36 @@ namespace MyApp
         private void UpdateSum(object sender, RoutedEventArgs e)
         {
             Log("");
+        }
+
+        
+    private void OperationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string Operation;
+            ComboBox comboBox = (ComboBox)sender;
+            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            Operation = selectedItem.Content.ToString();
+            if (Operation == "Доход")
+            {
+                List<String> categories = new List<string>();
+                categories.Add("Заработная плата");
+                categories.Add("Возврат долга");
+                categories.Add("Дивиденты");
+                ComboBox_Category.ItemsSource = categories;
+            }
+            if (Operation == "Расход")
+            {
+                List<String> categories = new List<string>();
+                categories.Add("Развлечение");
+                categories.Add("Еда");
+                categories.Add("Транспорт");
+                ComboBox_Category.ItemsSource = categories;
+            }
+        }
+
+        private void ComboBox_Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            Input_Category.Text = ComboBox_Category.Text;
         }
     }
 }

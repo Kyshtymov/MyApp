@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x64\Debug\MyApp_1.0.0.0_x64_Debug.appx
+SymbolPackage=C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x64\Debug\Symbols\MyApp_1.0.0.0_x64_Debug.appxsym

@@ -230,3 +230,4 @@ C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\System.Runtime.Interop
 C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x86\Debug\FxResources.System.Console.SR.resw
 C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x86\Debug\FxResources.System.Runtime.InteropServices.RuntimeInformation.SR.resw
 C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\obj\x86\Debug\Microsoft.Data.Sqlite\en-US\Microsoft.Data.Sqlite.Strings.resw
+C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\Core\ForBundle\AppxManifest.xml
