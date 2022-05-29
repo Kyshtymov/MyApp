@@ -121,7 +121,7 @@
                 
                 <ToggleSwitch x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled"/>
                 <ToggleSwitch x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled_Sum"/>
-                <Button Click="UpdateTable" Content="Обновить таблицу" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <Button Click="UpdateTable" Content="Обновить данные" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid>
 

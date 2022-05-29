@@ -15,8 +15,7 @@
             <ColumnDefinition Width="113*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <TextBlock FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,15">Меню</TextBlock>
+        <Grid Grid.Column="0" Background="LightGray">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                 
                 <ComboBox x:ConnectionId='18' x:Name="OperationComboBox" HorizontalAlignment="Stretch"
@@ -49,7 +48,7 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="Linen">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
@@ -112,7 +111,7 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="3">
+        <Grid Grid.Column="2" Background="LightBlue">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock FontSize="14" HorizontalAlignment="Center" Margin="15,15,15,5">Удалить или обновить по ID</TextBlock>
                 <TextBox x:ConnectionId='2' Name="Delete_ID" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10"></TextBox>

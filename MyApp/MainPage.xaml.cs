@@ -95,9 +95,10 @@ public sealed partial class MainPage : Page
             float sum = 0;
             int operations_filter = 0;
 
-            if (History) entries = DataAccess.GetData(Day_filter_1.Text, Month_filter_1.Text, Year_filter_1.Text, Day_filter_2.Text, Month_filter_2.Text, Year_filter_2.Text, stat, out sum, out operations_filter);
+            if (History) entries = DataAccess.GetData(Day_filter_1.Text, Month_filter_1.Text, Year_filter_1.Text, Day_filter_2.Text, Month_filter_2.Text, Year_filter_2.Text, stat, "", out sum, out operations_filter);
             //вывод истории на экран, если надо, если введены даты периода для статистики, отображение операций за период
-            
+
+
 
             //выводы информации по вводу некорректных данных
 
@@ -172,6 +173,38 @@ public sealed partial class MainPage : Page
                 if (!stat) entries.Insert(pos + 1, CommandSum2);
                 if (stat) entries.Insert(pos + 1, CommandSum3);
                 pos += 2;
+            }
+
+            if (stat)
+            {
+                float[] sumCategory = new float[4];
+                int[] operationCategory = new int[4];
+                int k = 0;
+                foreach (string Category in categories_income)
+                {
+                    if (Category != "")
+                    {
+                        DataAccess.GetData(Day_filter_1.Text, Month_filter_1.Text, Year_filter_1.Text, Day_filter_2.Text, Month_filter_2.Text, Year_filter_2.Text, stat, Category, out sumCategory[k], out operationCategory[k]);
+                        entries.Insert(pos, "Доход по категории   " + Category + " = " + sumCategory[k].ToString() + "     Операций = " + operationCategory[k].ToString());
+                        pos++;
+                        k++;
+                    }
+                }
+               
+                k = 0;
+                foreach (string Category in categories_outcome)
+                {
+                    if (Category != "")
+                    {
+                        DataAccess.GetData(Day_filter_1.Text, Month_filter_1.Text, Year_filter_1.Text, Day_filter_2.Text, Month_filter_2.Text, Year_filter_2.Text, stat, Category, out sumCategory[k], out operationCategory[k]);
+                        entries.Insert(pos, "Расход по категории   " + Category + " = " + sumCategory[k].ToString() + "     Операций = " + operationCategory[k].ToString());
+                        pos++;
+                        k++;
+                    }
+                }
+                DataAccess.GetData(Day_filter_1.Text, Month_filter_1.Text, Year_filter_1.Text, Day_filter_2.Text, Month_filter_2.Text, Year_filter_2.Text, stat, "Прочее", out sumCategory[k], out operationCategory[k]);
+                entries.Insert(pos, "Прибыль по категории   " + "Прочее" + " = " + sumCategory[k].ToString() + "     Операций = " + operationCategory[k].ToString());
+                pos++;
             }
 
             if ((History) && (!stat)) entries.Insert(pos, "История операций:");

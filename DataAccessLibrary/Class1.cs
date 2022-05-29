@@ -132,7 +132,7 @@ namespace DataAccessLibrary
             }
 
         }
-        public static List<String> GetData(string Day1, string Month1, string Year1, string Day2, string Month2, string Year2, bool stat, out float sum, out int operations) //функция возвращает список данных за период или все данные
+        public static List<String> GetData(string Day1, string Month1, string Year1, string Day2, string Month2, string Year2, bool stat, string Category, out float sum, out int operations) //функция возвращает список данных за период или все данные
         {
             List<String> entries = new List<string>();
 
@@ -147,9 +147,11 @@ namespace DataAccessLibrary
                 if (!stat) selectCommand = new SqliteCommand("SELECT * from MyTable", db);
                 else
                 {
-                    selectCommand = new SqliteCommand("SELECT * from MyTable WHERE (Year BETWEEN @Year1 AND @Year2)", db);
+                    if (Category == "") selectCommand = new SqliteCommand("SELECT * from MyTable WHERE (Year BETWEEN @Year1 AND @Year2)", db);
+                    else selectCommand = new SqliteCommand("SELECT * from MyTable WHERE (Year BETWEEN @Year1 AND @Year2 AND Category = @Category)", db);
                     selectCommand.Parameters.AddWithValue("@Year1", Year1);
                     selectCommand.Parameters.AddWithValue("@Year2", Year2);
+                    selectCommand.Parameters.AddWithValue("@Category", Category);
                 }
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
