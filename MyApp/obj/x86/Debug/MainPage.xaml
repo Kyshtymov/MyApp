@@ -82,8 +82,7 @@
                 <StackPanel Grid.Column="4" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
                     <ComboBox x:ConnectionId='12' Name="Input_Category"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
-                    IsEditable="true"                                                       
-                                                >
+                    IsEditable="true"                                                                                             >
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"/>
@@ -99,7 +98,7 @@
                     <TextBox x:ConnectionId='11' Name="Input_Commentary" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
                 </StackPanel>
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <ListView x:ConnectionId='9' x:Name="Output"  HorizontalAlignment="Center" >
                     <ListView.ItemTemplate>
@@ -121,7 +120,7 @@
                 
                 <ToggleSwitch x:ConnectionId='6' x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                               />
                 <ToggleSwitch x:ConnectionId='7' x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать"                                   />
-                <Button x:ConnectionId='8'                     Content="Обновить таблицу" Margin ="10" HorizontalAlignment="Stretch"></Button>
+                <Button x:ConnectionId='8'                     Content="Обновить данные" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid>
 

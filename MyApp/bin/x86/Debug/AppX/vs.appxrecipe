@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2022-05-29T17:50:21.004</Modified>
+      <Modified>2022-05-30T10:36:01.257</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\MyApp.exe">
       <PackagePath>entrypoint\MyApp.exe</PackagePath>
-      <Modified>2022-05-29T17:50:19.489</Modified>
+      <Modified>2022-05-30T10:36:00.397</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Lagrange\.nuget\packages\microsoft.data.sqlite\1.1.1\lib\netstandard1.3\Microsoft.Data.Sqlite.dll">
       <PackagePath>Microsoft.Data.Sqlite.dll</PackagePath>
@@ -52,7 +52,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\DataAccessLibrary\bin\x86\Debug\DataAccessLibrary.dll">
       <PackagePath>DataAccessLibrary.dll</PackagePath>
-      <Modified>2022-05-29T17:37:03.566</Modified>
+      <Modified>2022-05-30T10:34:01.255</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.19041.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
@@ -102,11 +102,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2022-05-29T17:45:01.523</Modified>
+      <Modified>2022-05-30T10:34:07.894</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2022-05-29T17:45:01.523</Modified>
+      <Modified>2022-05-30T10:34:07.894</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -118,7 +118,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Lagrange\Desktop\MyApp\MyApp\MyApp\bin\x86\Debug\Core\MyApp.exe">
       <PackagePath>MyApp.exe</PackagePath>
-      <Modified>2022-05-29T17:50:21.004</Modified>
+      <Modified>2022-05-30T10:36:01.257</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

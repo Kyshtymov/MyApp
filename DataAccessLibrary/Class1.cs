@@ -132,8 +132,8 @@ namespace DataAccessLibrary
             }
 
         }
-        public static List<String> GetData(string Day1, string Month1, string Year1, string Day2, string Month2, string Year2, bool stat, string Category, out float sum, out int operations) //функция возвращает список данных за период или все данные
-        {
+        public static List<String> GetData(string Day1, string Month1, string Year1, string Day2, string Month2, string Year2, bool stat, string Category, out float sum, out int operations)
+        { //функция возвращает список данных за период или все данные, по категориями или нет
             List<String> entries = new List<string>();
 
             string dbpath = System.IO.Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "sqliteSample.db");
@@ -246,7 +246,7 @@ namespace DataAccessLibrary
             {
                 db.Open();
                 SqliteCommand selectCommand;
-                if ((ID + Day + Month + Year + Amount + Category + Commentary == "") && (!total)) return "0"; //проверка, если нет критерий
+                if ((ID + Day + Month + Year + Amount + Category + Commentary == "") && (!total)) total = true; //проверка, если нет критерий, если поля для критерией пустые, то выводит общую сумму
 
                 string IDCom = "", DayCom = "", MonthCom = "", YearCom = "", AmountCom = "", CategoryCom = "", CommentaryCom = "";
 

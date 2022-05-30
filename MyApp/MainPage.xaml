@@ -82,8 +82,7 @@
                 <StackPanel Grid.Column="4" VerticalAlignment="Center">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Margin="15,15,15,5">Категория</TextBlock>
                     <ComboBox Name="Input_Category"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"
-                    IsEditable="true" SelectionChanged="ComboBox_Category_SelectionChanged" 
-          TextSubmitted="Category_TextSubmitted">
+                    IsEditable="true" SelectionChanged="ComboBox_Category_SelectionChanged" TextSubmitted="Category_TextSubmitted">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"/>
@@ -99,7 +98,7 @@
                     <TextBox Name="Input_Commentary" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="5"></TextBox>
                 </StackPanel>
             </Grid>
-            
+
             <Grid Grid.Row="1">
                 <ListView x:Name="Output"  HorizontalAlignment="Center" >
                     <ListView.ItemTemplate>
@@ -120,7 +119,7 @@
                 <Button Click="DeleteAllData" Margin ="10, 10, 10, 10" HorizontalAlignment="Stretch" Content="Стереть таблицу полностью"></Button>
                 
                 <ToggleSwitch x:Name = "ToggleSwitch" Header="История операций" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled"/>
-                <ToggleSwitch x:Name = "ToggleSwitchSum" Header="Прибыль по критериям" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled_Sum"/>
+                <ToggleSwitch x:Name = "ToggleSwitchSum" Header="Прибыль" Margin="5" HorizontalAlignment="Stretch" IsOn="False" OffContent="Спрятать" OnContent="Показать" Toggled="ToggleSwitch_Toggled_Sum"/>
                 <Button Click="UpdateTable" Content="Обновить данные" Margin ="10" HorizontalAlignment="Stretch"></Button>
             </StackPanel>
         </Grid>

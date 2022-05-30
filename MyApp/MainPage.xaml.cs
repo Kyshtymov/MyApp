@@ -23,15 +23,15 @@ namespace MyApp
     /// </summary>
     /// 
 
-public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page
     {
 
         bool History = false; //отображение истории операций
         bool Update = false; //обновление по ID
         bool ShowSum = false; //отображение суммы
         bool CheckDay = true; //проверка корректности ввода данных
-        bool CheckMonth = true; 
-        bool CheckYear = true; 
+        bool CheckMonth = true;
+        bool CheckYear = true;
         bool CheckAmount = true;
 
         List<String> categories_income = new List<String>();
@@ -53,7 +53,7 @@ public sealed partial class MainPage : Page
 
 
 
-    void CheckData(string DayS, string MonthS, string YearS, out bool CheckDay, out bool CheckMonth, out bool CheckYear) //функция для проверки корретности даты
+        void CheckData(string DayS, string MonthS, string YearS, out bool CheckDay, out bool CheckMonth, out bool CheckYear) //функция для проверки корретности даты
         {
             int Day;
             CheckDay = int.TryParse(DayS, out Day);
@@ -62,12 +62,12 @@ public sealed partial class MainPage : Page
 
             int Month;
             CheckMonth = int.TryParse(MonthS, out Month);
-            if ((CheckMonth) && (Month > 0) && (Month < 12)) CheckMonth = true;
+            if ((CheckMonth) && (Month > 0) && (Month < 13)) CheckMonth = true;
             else CheckMonth = false;
 
             int Year;
             CheckYear = int.TryParse(YearS, out Year);
-            if ((CheckYear) && (Year > 0) && (Year < 23)) CheckYear = true;
+            if ((CheckYear) && (Year > 0) && (Year < 24)) CheckYear = true;
             else CheckYear = false;
         }
 
@@ -76,7 +76,7 @@ public sealed partial class MainPage : Page
             List<String> entries = new List<String>();
             int pos = 0;
 
-            bool stat = true;
+            bool stat = true; //выводить ли статистики или нет
 
             bool CheckDayFilter1 = true, CheckMonthFilter1 = true, CheckYearFilter1 = true;
             bool CheckDayFilter2 = true, CheckMonthFilter2 = true, CheckYearFilter2 = true; //для проверки корректности ввода даты для периодов
@@ -107,13 +107,13 @@ public sealed partial class MainPage : Page
                 entries.Insert(pos, "Введите день от 1 до 31 числа для начала периода отчёта");
                 pos++;
             }
-            
+
             if (!CheckMonthFilter1)
             {
                 entries.Insert(pos, "Введите месяц от 1 до 12 для начала периода отчёта");
                 pos++;
             }
-            
+
             if (!CheckYearFilter1)
             {
                 entries.Insert(pos, "Введите год от 1 до 23 для начала периода отчёта");
@@ -125,19 +125,19 @@ public sealed partial class MainPage : Page
                 entries.Insert(pos, "Введите день от 1 до 31 числа для конца периода отчёта");
                 pos++;
             }
-            
-            if (!CheckMonthFilter2)    
+
+            if (!CheckMonthFilter2)
             {
                 entries.Insert(pos, "Введите месяц от 1 до 12 для конца периода отчёта");
                 pos++;
             }
-            
+
             if (!CheckYearFilter2)
             {
                 entries.Insert(pos, "Введите год от 1 до 23 для конца периода отчёта");
-                 pos++;
+                pos++;
             }
-            
+
             if (!CheckDay)
             {
                 entries.Insert(pos, "Введите день от 1 до 31 числа");
@@ -175,7 +175,7 @@ public sealed partial class MainPage : Page
                 pos += 2;
             }
 
-            if (stat)
+            if (stat) //выводит статитику по категориям
             {
                 float[] sumCategory = new float[4];
                 int[] operationCategory = new int[4];
@@ -190,7 +190,7 @@ public sealed partial class MainPage : Page
                         k++;
                     }
                 }
-               
+
                 k = 0;
                 foreach (string Category in categories_outcome)
                 {
@@ -219,7 +219,7 @@ public sealed partial class MainPage : Page
         private void WriteInTable(int income) //запись данных в таблицу, income - индикатор дохода или расхода
         {
             string Category = Input_Category.Text;
-            if (Input_Category.Text == "")  Category = "Прочее"; //если в категории пусто, то его закидывает в прочее
+            if (Input_Category.Text == "") Category = "Прочее"; //если в поле категории пусто, то его закидывает в прочее
 
             CheckData(Input_Day.Text, Input_Month.Text, Input_Year.Text, out CheckDay, out CheckMonth, out CheckYear); //проверки входных данных
 
@@ -236,7 +236,7 @@ public sealed partial class MainPage : Page
                 DataAccess.AddData(Input_Day.Text, Input_Month.Text, Input_Year.Text, Input_Amount.Text, Category, Input_Commentary.Text, income); //заносит данные в таблицу
                 Log("");
             }
-        
+
             if ((Check) && (Update))
             {
                 if (Delete_ID.Text != "")
@@ -255,7 +255,7 @@ public sealed partial class MainPage : Page
 
         private void Add(object sender, RoutedEventArgs e) //кнопка для начала процесса записи данных в таблицу
         {
-            ComboBoxItem selectedItem = (ComboBoxItem) OperationComboBox.SelectedItem;
+            ComboBoxItem selectedItem = (ComboBoxItem)OperationComboBox.SelectedItem;
             if (selectedItem != null)
             {
                 String Operation = selectedItem.Content.ToString();
@@ -304,7 +304,7 @@ public sealed partial class MainPage : Page
             if (toggleSwitch != null)
             {
                 if (toggleSwitch.IsOn == true)
-                { 
+                {
                     Update = true;
                 }
                 else
@@ -338,8 +338,8 @@ public sealed partial class MainPage : Page
             Log("");
         }
 
-        
-    private void OperationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //список категорий, согласно выбранной операции
+
+        private void OperationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) //список категорий, согласно выбранной операции
         {
             string Operation;
             ComboBox comboBox = (ComboBox)sender;
@@ -354,8 +354,8 @@ public sealed partial class MainPage : Page
                 Input_Category.ItemsSource = categories_outcome;
             }
         }
-        
-        
+
+
         private void Category_TextSubmitted(ComboBox sender, ComboBoxTextSubmittedEventArgs e)
         {
 
@@ -363,7 +363,7 @@ public sealed partial class MainPage : Page
 
         private void ComboBox_Category_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-        
+
         }
 
         private void Clear_filter(object sender, RoutedEventArgs e) //кнопка очищяет данные из периодов
