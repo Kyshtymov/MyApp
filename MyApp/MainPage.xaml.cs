@@ -53,22 +53,22 @@ namespace MyApp
 
 
 
-        void CheckData(string DayS, string MonthS, string YearS, out bool CheckDay, out bool CheckMonth, out bool CheckYear) //функция для проверки корретности даты
+        void CheckData(string DayS, string MonthS, string YearS, out bool CheckDayS, out bool CheckMonthS, out bool CheckYearS) //функция для проверки корретности даты
         {
             int Day;
-            CheckDay = int.TryParse(DayS, out Day);
-            if ((CheckDay) && (Day > 0) && (Day < 32)) CheckDay = true;
-            else CheckDay = false;
+            CheckDayS = int.TryParse(DayS, out Day);
+            if ((CheckDayS) && (Day > 0) && (Day < 32)) CheckDayS = true;
+            else CheckDayS = false;
 
             int Month;
-            CheckMonth = int.TryParse(MonthS, out Month);
-            if ((CheckMonth) && (Month > 0) && (Month < 13)) CheckMonth = true;
-            else CheckMonth = false;
+            CheckMonthS = int.TryParse(MonthS, out Month);
+            if ((CheckMonthS) && (Month > 0) && (Month < 13)) CheckMonthS = true;
+            else CheckMonthS = false;
 
             int Year;
-            CheckYear = int.TryParse(YearS, out Year);
-            if ((CheckYear) && (Year > 0) && (Year < 24)) CheckYear = true;
-            else CheckYear = false;
+            CheckYearS = int.TryParse(YearS, out Year);
+            if ((CheckYearS) && (Year > 0) && (Year < 24)) CheckYearS = true;
+            else CheckYearS = false;
         }
 
         private void Log(string LogText) //функция отображения текста на экран
